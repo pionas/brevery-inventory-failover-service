@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>pl.excellentapp.brewery.boot</groupId>
+        <artifactId>brewery-parent</artifactId>
+        <version>1.0.2</version>
+    </parent>
+
+    <groupId>pl.excellentapp.brewery.inventory-failover</groupId>
+    <artifactId>brewery-inventory-failover-service</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <jackson-datatype-jsr310.version>2.18.2</jackson-datatype-jsr310.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>github</id>
+            <url>https://maven.pkg.github.com/pionas/brewery-parent</url>
+        </repository>
+    </repositories>
+
+    <scm>
+        <url>https://github.com/pionas/brewery-inventory-failover-service</url>
+        <connection>scm:git:https://github.com/pionas/brewery-inventory-failover-service.git</connection>
+        <developerConnection>scm:git:https://github.com/pionas/brewery-inventory-failover-service.git</developerConnection>
+    </scm>
+
+    <dependencies>
+        <!-- external dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+        <!-- external test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <configuration>
+                        <targetClasses>
+                            <param>pl.excellentapp.brewery.inventoryfailover.*</param>
+                        </targetClasses>
+                        <targetTests>
+                            <param>pl.excellentapp.brewery.inventoryfailover.*</param>
+                        </targetTests>
+                        <excludedClasses>
+                            <param>pl.excellentapp.brewery.inventoryfailover.**.*Mapper*</param>
+                            <param>pl.excellentapp.brewery.inventoryfailover.**.*Configuration*</param>
+                        </excludedClasses>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+</project>
