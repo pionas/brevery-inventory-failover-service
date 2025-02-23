@@ -16,6 +16,7 @@
 
     <properties>
         <jackson-datatype-jsr310.version>2.18.2</jackson-datatype-jsr310.version>
+        <spring-cloud-starter-netflix-eureka-client.version>4.2.0</spring-cloud-starter-netflix-eureka-client.version>
     </properties>
 
     <repositories>
@@ -45,7 +46,7 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-            <version>4.2.0</version>
+            <version>${spring-cloud-starter-netflix-eureka-client.version}</version>
         </dependency>
     </dependencies>
     <build>
